@@ -26,6 +26,7 @@ return {
 
 		vim.keymap.set("n", "<leader>ex", "<cmd> Neotree %<CR>", { desc = "Neotree" })
 		vim.keymap.set("n", "<leader>ec", "<cmd> Neotree close<CR>", { desc = "Close Neotree" })
+		vim.keymap.set("n", "<C-n>", "<cmd> Neotree toggle<CR>", { desc = "Toggle Neotree" })
 		-- vim.keymap.set("n", "<leader>eb", "<cmd> Neotree buffers<CR>", { desc = "Neotree Buffers" })
 	end,
 }

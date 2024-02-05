@@ -31,6 +31,7 @@ return {
 				"gopls",
 				"tsserver",
 				"rust_analyzer",
+				"volar",
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
@@ -87,6 +88,77 @@ return {
 				header = "",
 				prefix = "",
 			},
+		})
+
+		-- Global mappings.
+		-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+		vim.keymap.set("n", "<leader>lod", vim.diagnostic.open_float, { desc = "Open Diagnostics" })
+		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev Diagnostics" })
+		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostics" })
+		vim.keymap.set("n", "<leader>lsl", vim.diagnostic.setloclist, { desc = "Set Loclist Diagnostics" })
+
+		-- Use LspAttach autocommand to only map the following keys
+		-- after the language server attaches to the current buffer
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+			callback = function(ev)
+				-- Enable completion triggered by <c-x><c-o>
+				vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+				-- Buffer local mappings.
+				-- See `:help vim.lsp.*` for documentation on any of the below functions
+				local opts = { buffer = ev.buf }
+
+				-- Go To's
+				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { table.unpack(opts), desc = "Go To Declaration" })
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, { table.unpack(opts), desc = "Go To Definition" })
+				vim.keymap.set("n", "gr", vim.lsp.buf.references, { table.unpack(opts), desc = "Go To References" })
+				vim.keymap.set(
+					"n",
+					"go",
+					vim.lsp.buf.type_definition,
+					{ table.unpack(opts), desc = "Go To Type Definition" }
+				)
+				vim.keymap.set(
+					"n",
+					"gi",
+					vim.lsp.buf.implementation,
+					{ table.unpack(opts), desc = "Go To Implementation" }
+				)
+
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, { table.unpack(opts), desc = "Open LSP Info" })
+				vim.keymap.set(
+					"n",
+					"<C-k>",
+					vim.lsp.buf.signature_help,
+					{ table.unpack(opts), desc = "LSP Signature Help" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>lwa",
+					vim.lsp.buf.add_workspace_folder,
+					{ table.unpack(opts), desc = "LSP Add Workspace Folder" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>lwr",
+					vim.lsp.buf.remove_workspace_folder,
+					{ table.unpack(opts), desc = "LSP Remove Workspace Folder" }
+				)
+				vim.keymap.set("n", "<leader>lwl", function()
+					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+				end, { table.unpack(opts), desc = "LSP List Workspace Folders" })
+				vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { table.unpack(opts), desc = "Rename References" })
+				vim.keymap.set(
+					{ "n", "v" },
+					"<leader>lca",
+					vim.lsp.buf.code_action,
+					{ table.unpack(opts), desc = "LSP Code Action" }
+				)
+				vim.keymap.set("n", "<leader>lfb", function()
+					vim.lsp.buf.format({ async = true })
+				end, { table.unpack(opts), desc = "LSP Format Buffer" })
+			end,
 		})
 	end,
 }

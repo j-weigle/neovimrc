@@ -21,9 +21,9 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank Rest of Line to Clipboa
 
 -- paste without copying underlying text in visual mode only
 -- x - visual, s - select, v - visual and select
-vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste Without Yanking" })
+vim.keymap.set("x", "<leader>p", [["_dp]], { desc = "Paste Without Yanking" })
+vim.keymap.set("x", "<leader>P", [["_dP]], { desc = "Paste Before Cursor Without Yanking" })
 -- vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste From Clipboard" })
-vim.keymap.set("n", "<leader>P", [["+P]], { desc = "Paste Before Cursor From Clipboard" })
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete Without Yanking" })
 

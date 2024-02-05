@@ -11,7 +11,7 @@ return {
 
 		vim.keymap.set("n", "<leader>af", function()
 			require("conform").format()
-		end, {})
+		end, { desc = "Auto Format" })
 
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			pattern = "*",

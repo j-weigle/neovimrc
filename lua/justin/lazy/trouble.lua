@@ -6,15 +6,15 @@ return {
 
 		vim.keymap.set("n", "<leader>eg", function()
 			require("trouble").toggle()
-		end)
+		end, { desc = "Trouble" })
 		vim.keymap.set("n", "<leader>ew", function()
 			require("trouble").toggle("workspace_diagnostics")
-		end)
+		end, { desc = "Trouble Workspace" })
 		vim.keymap.set("n", "<leader>er", function()
 			require("trouble").toggle("document_diagnostics")
-		end)
+		end, { desc = "Trouble Document" })
 		vim.keymap.set("n", "<leader>ef", function()
 			require("trouble").toggle("quickfix")
-		end)
+		end, { desc = "Trouble Quickfix" })
 	end,
 }

@@ -1,12 +1,28 @@
-function ColorMyPencils(color)
-	color = color or "rose-pine"
-	vim.cmd.colorscheme(color)
-
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-end
-
 return {
+	{
+		"folke/tokyonight.nvim",
+		config = function()
+			require("tokyonight").setup({
+				transparent = true,
+				styles = {
+					sidebars = "transparent",
+					floats = "dark",
+				},
+			})
+		end,
+	},
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		config = function()
+			require("catppuccin").setup({
+				transparent_background = true,
+			})
+		end,
+	},
+	{
+		"bluz71/vim-nightfly-colors",
+	},
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
@@ -17,10 +33,6 @@ return {
 					transparency = true,
 				},
 			})
-
-			vim.cmd("colorscheme rose-pine")
-
-			ColorMyPencils()
 		end,
 	},
 }

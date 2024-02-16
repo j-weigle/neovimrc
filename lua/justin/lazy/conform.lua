@@ -7,6 +7,7 @@ return {
 				lua = { "stylua" },
 				javascript = { { "prettierd", "prettier" } },
 				vue = { { "prettierd", "prettier" } },
+				svelte = { { "prettierd", "prettier" } },
 			},
 		})
 

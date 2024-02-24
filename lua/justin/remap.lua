@@ -4,6 +4,8 @@ vim.g.mapleader = " "
 -- vim.keymap.set("n", "<Tab>", ":bnext<CR>", { desc = "Next Buffer" })
 -- vim.keymap.set("n", "<S-Tab>", ":bprev<CR>", { desc = "Prev Buffer" })
 
+vim.keymap.set("n", "<Esc>", "<cmd> noh <CR>", { desc = "Clear highlights" })
+
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move Selection Down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move Selection Up" })
 

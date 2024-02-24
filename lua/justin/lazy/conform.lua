@@ -6,6 +6,7 @@ return {
 				go = { "goimports", "gofmt" },
 				lua = { "stylua" },
 				javascript = { { "prettierd", "prettier" } },
+				typescript = { { "prettierd", "prettier" } },
 				vue = { { "prettierd", "prettier" } },
 				svelte = { { "prettierd", "prettier" } },
 			},

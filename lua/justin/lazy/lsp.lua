@@ -22,6 +22,7 @@ return {
 			vim.lsp.protocol.make_client_capabilities(),
 			cmp_lsp.default_capabilities()
 		)
+		local lspconfig = require("lspconfig")
 
 		require("fidget").setup({})
 		require("mason").setup()
@@ -35,13 +36,32 @@ return {
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
-					require("lspconfig")[server_name].setup({
+					lspconfig[server_name].setup({
 						capabilities = capabilities,
 					})
 				end,
 
+				["tsserver"] = function()
+					lspconfig.tsserver.setup({
+						capabilities = capabilities,
+						init_options = {
+							plugins = {
+								{
+									name = "@vue/typescript-plugin",
+									location = ".",
+									languages = { "typescript", "vue" },
+								},
+							},
+						},
+						filetypes = {
+							"javascript",
+							"typescript",
+							"vue",
+						},
+					})
+				end,
+
 				["lua_ls"] = function()
-					local lspconfig = require("lspconfig")
 					lspconfig.lua_ls.setup({
 						capabilities = capabilities,
 						settings = {
